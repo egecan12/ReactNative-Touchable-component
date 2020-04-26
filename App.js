@@ -1,22 +1,26 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
-  const [name, setname] = useState('ege');
-  const [person, setperson] = useState({name:"mert", age:22})
+  const [name, setName] = useState('ege');
+  const [age, setAge] = useState(23)
 
   const clickHandler = () => {
-    setname('Doruk');
-    setperson({name:'ismail', age:20})
+    <Text>Hi my name is {name}</Text> 
+
   }
   return (
-  
-    <View style={styles.container}>
-      <Text>Hi my name is {name}</Text> 
-      <Text>This is my friend {person.name}</Text> 
-      <Text>Hi is {person.age} years old</Text> 
 
-      <Text style={styles.pinkText}>Orange</Text>
+    <View style={styles.container}>
+    <Text>What is your name?</Text> 
+
+      <TextInput style={styles.input} placeholder={'name please e.g John '} onChangeText={(val)=>setName(val)}></TextInput>
+      <Text>What is your age?</Text> 
+
+      <TextInput style={styles.input} placeholder={'age please e.g 23'} keyboardType='numeric' onChangeText={(val)=>setAge(val)}></TextInput>
+{/* Burada ki ananonim fonksyonlar valueyu otomatik olarak aliyor */}
+      <Text>Hi my name is {name} and my age is {age}</Text> 
+
       <Button title='update state' onPress={clickHandler}/>
     </View>
   );
@@ -31,5 +35,11 @@ const styles = StyleSheet.create({
   },
   pinkText: {
     color: '#FF5733',
+  },
+  input: {
+    borderWidth:4,
+    borderColor:'#000000',
+    padding:15,
+  
   }
 });
