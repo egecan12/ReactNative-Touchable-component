@@ -1,9 +1,18 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ScrollViewComponent } from 'react-native';
 
 export default function App() {
-  const [name, setName] = useState('ege');
-  const [age, setAge] = useState(23)
+  const [people, setPeople] = useState([
+   {name:'mike', key:"1"},
+    {name:'mert', key:"2"},
+    {name:'hakan', key:"3"},
+    {name:'shantel', key:"4"},
+    {name:'bourak', key:"5"},
+    {name:'john', key:"6"},
+    {name:'jason', key:"7"},
+
+  
+  ]);
 
   const clickHandler = () => {
     <Text>Hi my name is {name}</Text> 
@@ -12,16 +21,17 @@ export default function App() {
   return (
 
     <View style={styles.container}>
-    <Text>What is your name?</Text> 
+    
+    <ScrollView>
+    {people.map((item)=>{
+     return(
+       <View key={item.key}>
+         <Text style={styles.item}>{item.name}</Text>
+       </View>
+     )
+    })}
+    </ScrollView>
 
-      <TextInput style={styles.input} placeholder={'name please e.g John '} onChangeText={(val)=>setName(val)}></TextInput>
-      <Text>What is your age?</Text> 
-
-      <TextInput style={styles.input} placeholder={'age please e.g 23'} keyboardType='numeric' onChangeText={(val)=>setAge(val)}></TextInput>
-{/* Burada ki ananonim fonksyonlar valueyu otomatik olarak aliyor */}
-      <Text>Hi my name is {name} and my age is {age}</Text> 
-
-      <Button title='update state' onPress={clickHandler}/>
     </View>
   );
 }
@@ -32,14 +42,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 20
   },
-  pinkText: {
-    color: '#FF5733',
-  },
-  input: {
-    borderWidth:4,
-    borderColor:'#000000',
-    padding:15,
-  
+  item: {
+    marginTop:40,
+    padding:40,
+    width:300,
+    backgroundColor: '#f13',
+    fontSize:24
+
+
+
   }
+
+
 });
