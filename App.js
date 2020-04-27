@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, ScrollView, ScrollViewComponent } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 export default function App() {
   const [people, setPeople] = useState([
-   {name:'mike', key:"1"},
-    {name:'mert', key:"2"},
-    {name:'hakan', key:"3"},
-    {name:'shantel', key:"4"},
-    {name:'bourak', key:"5"},
-    {name:'john', key:"6"},
-    {name:'jason', key:"7"},
+   {name:'Cara', id:"1"},
+    {name:'mert', id:"2"},
+    {name:'hakan', id:"3"},
+    {name:'shantel', id:"4"},
+    {name:'bourak', id:"5"},
+    {name:'john', id:"6"},
+    {name:'jason', id:"7"},
 
   
   ]);
@@ -22,17 +22,20 @@ export default function App() {
 
     <View style={styles.container}>
     
-    <ScrollView>
-    {people.map((item)=>{
-     return(
-       <View key={item.key}>
-         <Text style={styles.item}>{item.name}</Text>
-       </View>
-     )
-    })}
-    </ScrollView>
+    <FlatList
+      data={people}
+      renderItem={({item}) =>(<Text style={styles.item}>{item.name}</Text>)}
+      keyExtractor={(item) => item.id}
+    />
+{/* As a fundemantal it reads key value. But in case of the data is containing id, we should use key extrator */}
 
     </View>
+
+    
+  
+
+
+
   );
 }
 
