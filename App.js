@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
 export default function App() {
   const [people, setPeople] = useState([
-   {name:'Cara', id:"1"},
+  
+    {name:'Cara', id:"1"},
     {name:'mert', id:"2"},
     {name:'hakan', id:"3"},
     {name:'shantel', id:"4"},
@@ -14,8 +15,11 @@ export default function App() {
   
   ]);
 
-  const clickHandler = () => {
-    <Text>Hi my name is {name}</Text> 
+  const PressHandler = (id) => {
+
+    console.log(id)
+    setPeople((people) => {
+      return people.filter(person => person.id != id) })
 
   }
   return (
@@ -24,7 +28,14 @@ export default function App() {
     
     <FlatList
       data={people}
-      renderItem={({item}) =>(<Text style={styles.item}>{item.name}</Text>)}
+      renderItem={({item}) =>(<TouchableOpacity onPress={() => PressHandler(item.id)  }>
+
+      <Text style={styles.item}>{item.name}
+    
+      </Text>
+      </TouchableOpacity>
+      
+      )}
       keyExtractor={(item) => item.id}
     />
 {/* As a fundemantal it reads key value. But in case of the data is containing id, we should use key extrator */}
